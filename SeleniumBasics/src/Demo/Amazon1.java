@@ -1,6 +1,7 @@
-package Demo;
+ package Demo;
 
 import java.time.Duration;
+import java.util.ArrayList;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -36,7 +37,22 @@ public class Amazon1 {
 		
 		driver.findElement(By.xpath("//*[@id=\"search\"]/div[1]/div[1]/div/span[1]/div[1]/div[5]/div/div/div/div/div[2]/div[1]/h2")).click();
 		
-		driver.findElement(By.xpath("//*[@id=\"buy-now-button\"]")).click();
+		ArrayList<String> tabs=new ArrayList<>(driver.getWindowHandles());
+		driver.switchTo().window(tabs.get(1));
+		
+		driver.findElement(By.id("buy-now-button")).click();
+		
+		WebElement signInElement=driver.findElement(By.id("ap_email"));
+		if(signInElement.isDisplayed())
+		{
+			System.out.println("user not signed");
+		}
+		else
+		{
+			System.out.println("user is signed");
+		}
+		driver.quit();
+
 		
 	 
 	}
